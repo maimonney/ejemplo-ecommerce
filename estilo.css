@@ -213,12 +213,6 @@ a{
     padding: 0 20px;
 }
 
-#informacion .container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 40px 20px;
-}
-
 #informacion img {
     max-width: 350px;
     height: auto;
