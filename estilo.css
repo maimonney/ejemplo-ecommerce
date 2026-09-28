@@ -46,7 +46,7 @@ body {
 
 /**	Header */
 .navbar h2 a{
-    background: url(img/logoNova.png) no-repeat center;
+    background: url(img/logoJoyeria.png) no-repeat center;
     background-size: contain;
     width: 100px;
     height: 80px;
@@ -294,22 +294,121 @@ a{
     font-size: 1.5rem;
 }
 
-.precio-total{
-    border: 2px solid #432941;
+#offcanvasRight .offcanvas-body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+#carritoContenido {
+    flex: 1;
+    overflow-y: auto;
+}
+
+#carritoContenido > div {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+#carritoContenido .producto-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+    flex: 1;
+}
+
+.lista-productos-carrito {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1;
+    overflow-y: auto;
+}
+
+
+.producto-carrito {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    border-bottom: 1px solid #ddd;
+    flex-shrink: 0;
+}
+
+.producto-carrito img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    flex-shrink: 0;
+    margin-bottom: 10px;
+}
+
+.info-producto-carrito {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+    flex: 1;
+}
+
+.info-producto-carrito .tituloProducto {
+    font-size: 1.6rem;
+    margin: 0;
+}
+
+.productosSumaResta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.productosSumaResta span {
+    font-size: 1.4rem;
+}
+
+.productosSumaResta button {
+    min-width: 28px;
+    height: 28px;
+    padding: 0;
+}
+
+.precio-total {
+    margin-top: auto;
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #432941;
     text-align: center;
-    padding: .5em;
+    background-color: white;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
 }
 
-.precio-total p{
-    display: inline;
+.precio-total p {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 600;
 }
 
-.precio-total a{
+.precio-total button {
+    display: block;
+    margin: 0 auto;
+}
+
+.precio-total a {
     text-decoration: none;
     color: white;
     font-size: 1.5rem;
 }
-.detalles-btn{
+
+.detalles-btn {
     font-weight: 600;
     font-size: 1.4rem;
 }

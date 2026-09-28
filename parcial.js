@@ -487,94 +487,145 @@ mostrarCarrito();
 
 //modal Carrito
 function mostrarProductosCarrito() {
-    
+
     const carritoContenido = document.getElementById("carritoContenido");
+
     while (carritoContenido.firstChild) {
         carritoContenido.removeChild(carritoContenido.firstChild);
     }
 
     let totalPrecio = 0;
 
+    // Contenedor exclusivo para los productos
+    const listaProductos = document.createElement("div");
+    listaProductos.classList.add("lista-productos-carrito");
+
     carrito.productosIds.forEach((productoId, indice) => {
+
         const producto = productos.find((p) => p.id === productoId);
         const cantidad = carrito.cantidades[indice];
         const precioProducto = producto.precio * cantidad;
 
+        // Contenedor del producto
         const elementoProducto = document.createElement("div");
         elementoProducto.classList.add("producto-carrito");
 
+        // Imagen
         const imgProducto = document.createElement("img");
         imgProducto.src = producto.imagen[0];
         imgProducto.alt = producto.nombre;
-        imgProducto.style.width = "150px";
-        imgProducto.style.height = "150px";
+
         elementoProducto.appendChild(imgProducto);
 
+        // Información del producto
+        const infoProducto = document.createElement("div");
+        infoProducto.classList.add("info-producto-carrito");
+
+        // Título
         const tituloProducto = document.createElement("p");
         tituloProducto.classList.add("tituloProducto");
-        tituloProducto.appendChild(document.createTextNode(producto.nombre));
-        elementoProducto.appendChild(tituloProducto);
+        tituloProducto.appendChild(
+            document.createTextNode(producto.nombre)
+        );
 
+        infoProducto.appendChild(tituloProducto);
+
+        // Controles de cantidad
         const productosSumaResta = document.createElement("div");
         productosSumaResta.classList.add("productosSumaResta");
 
-        const agregarCarritoModalBtn = document.createElement("button");
-        agregarCarritoModalBtn.classList.add("agregarCarritoModal", "agregarCarritoCambio");
-        agregarCarritoModalBtn.setAttribute("data-id", producto.id);
-        agregarCarritoModalBtn.setAttribute("data-val", producto.precio);
-        agregarCarritoModalBtn.appendChild(document.createTextNode("+"));
-        agregarCarritoModalBtn.addEventListener("click", () => {
-            agregarUnidadAlCarrito(productoId);
-            mostrarProductosCarrito();
-        });
-        productosSumaResta.appendChild(agregarCarritoModalBtn);
-
-        const cantidadSpan = document.createElement("span");
-        cantidadSpan.appendChild(document.createTextNode(`${cantidad}x`));
-        productosSumaResta.appendChild(cantidadSpan);
-
         const borrarCarritoModalBtn = document.createElement("button");
-        borrarCarritoModalBtn.classList.add("borrarCarritoModal", "agregarCarritoCambio");
+        borrarCarritoModalBtn.classList.add(
+            "borrarCarritoModal",
+            "agregarCarritoCambio"
+        );
         borrarCarritoModalBtn.setAttribute("data-id", producto.id);
         borrarCarritoModalBtn.setAttribute("data-val", producto.precio);
-        borrarCarritoModalBtn.appendChild(document.createTextNode("-"));
+        borrarCarritoModalBtn.appendChild(
+            document.createTextNode("-")
+        );
+
         borrarCarritoModalBtn.addEventListener("click", () => {
             quitarUnidadDelCarrito(productoId);
             mostrarProductosCarrito();
         });
+
+        const cantidadSpan = document.createElement("span");
+        cantidadSpan.appendChild(
+            document.createTextNode(`${cantidad}x`)
+        );
+
+        const agregarCarritoModalBtn = document.createElement("button");
+        agregarCarritoModalBtn.classList.add(
+            "agregarCarritoModal",
+            "agregarCarritoCambio"
+        );
+        agregarCarritoModalBtn.setAttribute("data-id", producto.id);
+        agregarCarritoModalBtn.setAttribute("data-val", producto.precio);
+        agregarCarritoModalBtn.appendChild(
+            document.createTextNode("+")
+        );
+
+        agregarCarritoModalBtn.addEventListener("click", () => {
+            agregarUnidadAlCarrito(productoId);
+            mostrarProductosCarrito();
+        });
+
         productosSumaResta.appendChild(borrarCarritoModalBtn);
+        productosSumaResta.appendChild(cantidadSpan);
+        productosSumaResta.appendChild(agregarCarritoModalBtn);
 
-        elementoProducto.appendChild(productosSumaResta);
+        infoProducto.appendChild(productosSumaResta);
 
+        // Precio
         const precioElement = document.createElement("span");
-        precioElement.appendChild(document.createTextNode(`Precio: $${precioProducto}`));
-        elementoProducto.appendChild(precioElement);
+        precioElement.classList.add("precio-producto-carrito");
+        precioElement.appendChild(
+            document.createTextNode(`Precio: $${precioProducto}`)
+        );
 
-        carritoContenido.appendChild(elementoProducto);
+        infoProducto.appendChild(precioElement);
+
+        elementoProducto.appendChild(infoProducto);
+
+        listaProductos.appendChild(elementoProducto);
 
         totalPrecio += precioProducto;
-        carrito.total = totalPrecio;
-        mostrarCarrito();
     });
 
+    carrito.total = totalPrecio;
+
+    // Agregamos la lista de productos
+    carritoContenido.appendChild(listaProductos);
+
+    // Contenedor del total
     const precioTotalElement = document.createElement("div");
     precioTotalElement.classList.add("precio-total");
 
     const totalP = document.createElement("p");
-    totalP.appendChild(document.createTextNode(`Total: $${totalPrecio}`));
+    totalP.appendChild(
+        document.createTextNode(`Total: $${totalPrecio}`)
+    );
+
     precioTotalElement.appendChild(totalP);
 
+    // Botón comprar
     const comprarBtn = document.createElement("button");
     comprarBtn.classList.add("btn", "agregarCarrito");
     comprarBtn.setAttribute("type", "button");
     comprarBtn.setAttribute("data-bs-toggle", "modal");
     comprarBtn.setAttribute("data-bs-target", "#modalCompra");
     comprarBtn.setAttribute("id", "botonComprar");
-    comprarBtn.appendChild(document.createTextNode("Comprar"));
+    comprarBtn.appendChild(
+        document.createTextNode("Comprar")
+    );
+
     precioTotalElement.appendChild(comprarBtn);
 
+    // Total siempre al final
     carritoContenido.appendChild(precioTotalElement);
-    
+
+    mostrarCarrito();
 }
 
 
