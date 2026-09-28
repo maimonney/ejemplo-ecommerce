@@ -1,4 +1,4 @@
-# Nova - Tienda de Joyería
+# Tienda de Joyería
 
 **Nova** es una tienda online dedicada a la venta de joyería única, enfocada en ofrecer una amplia selección de bijouterie que combina elegancia, modernidad y diseño creativo.
 
